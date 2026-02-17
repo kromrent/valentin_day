@@ -92,7 +92,9 @@ export function ValentineQuestion() {
   return (
     <section className="flex min-h-screen flex-col items-center justify-center px-4 py-20">
       <div className="flex flex-col items-center gap-8 text-center max-w-lg w-full">
-        <div className="text-5xl select-none" aria-hidden="true">{"\u{1F48C}"}</div>
+        <div className="text-5xl select-none animate-envelope-once" aria-hidden="true">
+          {"\u{1F48C}"}
+        </div>
 
         <h3 className="font-serif text-2xl md:text-4xl text-foreground leading-relaxed text-balance">
           {"Ты уверена, что хочешь стать моей Валентинкой?"}
@@ -136,6 +138,26 @@ export function ValentineQuestion() {
           {"*кнопка 'Нет' обладает собственным мнением"}
         </p>
       </div>
+
+      <style jsx>{`
+        @keyframes envelope-once {
+          0% { opacity: 0; transform: translateY(10px) scale(0.85) rotate(-6deg); }
+          45% { opacity: 1; transform: translateY(-6px) scale(1.06) rotate(3deg); }
+          70% { transform: translateY(2px) scale(0.98) rotate(-2deg); }
+          100% { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); }
+        }
+        .animate-envelope-once {
+          animation: envelope-once 1.4s ease-out 0.2s both;
+          display: inline-block;
+          transform-origin: center;
+          filter: drop-shadow(0 6px 10px rgba(255, 120, 150, 0.18));
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .animate-envelope-once {
+            animation: none;
+          }
+        }
+      `}</style>
     </section>
   )
 }

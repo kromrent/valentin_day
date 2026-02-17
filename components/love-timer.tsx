@@ -46,7 +46,9 @@ export function LoveTimer() {
   return (
     <section className="flex min-h-screen flex-col items-center justify-center px-4 py-20">
       <div className="flex flex-col items-center gap-10 text-center max-w-2xl">
-        <div className="text-5xl select-none" aria-hidden="true">{"\u23F0"}</div>
+        <div className="text-5xl select-none animate-alarm-ring" aria-hidden="true">
+          {"\u23F0"}
+        </div>
 
         <h3 className="font-serif text-2xl md:text-3xl text-foreground text-balance">
           {"Наш таймер любви"}
@@ -99,8 +101,27 @@ export function LoveTimer() {
           0%, 100% { transform: scale(1); opacity: 0.7; }
           50% { transform: scale(1.3); opacity: 1; }
         }
+        @keyframes alarm-ring {
+          0%, 65%, 100% { transform: rotate(0deg) scale(1); }
+          70% { transform: rotate(-6deg) scale(1.02); }
+          76% { transform: rotate(6deg) scale(1.03); }
+          82% { transform: rotate(-4deg) scale(1.01); }
+          88% { transform: rotate(4deg) scale(1.02); }
+          94% { transform: rotate(0deg) scale(1); }
+        }
         .animate-pulse-stagger {
           animation: pulse-stagger 1.5s ease-in-out infinite;
+        }
+        .animate-alarm-ring {
+          animation: alarm-ring 3s ease-in-out infinite;
+          display: inline-block;
+          transform-origin: center;
+          filter: drop-shadow(0 0 6px rgba(255, 120, 150, 0.2));
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .animate-alarm-ring {
+            animation: none;
+          }
         }
       `}</style>
     </section>
