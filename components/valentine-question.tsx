@@ -6,6 +6,7 @@ export function ValentineQuestion() {
   const [said, setSaid] = useState(false)
   const [noScale, setNoScale] = useState(1)
   const [yesScale, setYesScale] = useState(1)
+  const [hasEscaped, setHasEscaped] = useState(false)
   const noRef = useRef<HTMLButtonElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
 
@@ -27,6 +28,9 @@ export function ValentineQuestion() {
 
     setNoScale((prev) => Math.max(prev * 0.85, 0.3))
     setYesScale((prev) => Math.min(prev * 1.1, 2.0))
+    if (!hasEscaped) {
+      setHasEscaped(true)
+    }
   }, [])
 
   const [sparkles, setSparkles] = useState<Array<{ id: number; x: number; y: number; char: string }>>([])
@@ -125,7 +129,9 @@ export function ValentineQuestion() {
                 }))
               )
             }}
-            className="ml-8 px-8 py-4 rounded-xl bg-primary text-primary-foreground font-serif text-xl transition-all duration-300 hover:shadow-[0_0_50px_rgba(220,50,80,0.5)]"
+            className={`px-8 py-4 rounded-xl bg-primary text-primary-foreground font-serif text-xl transition-[transform,box-shadow] duration-200 hover:shadow-[0_0_50px_rgba(220,50,80,0.5)] ${
+              hasEscaped ? "" : "ml-8"
+            }`}
             style={{ transform: `scale(${yesScale})` }}
           >
             {"Да!"}
