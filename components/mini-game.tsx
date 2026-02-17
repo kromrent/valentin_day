@@ -34,7 +34,7 @@ export function MiniGame() {
         <div className="animate-scale-in flex flex-col items-center gap-6 text-center">
           <div className="text-7xl md:text-8xl select-none">{"\u{1F389}"}</div>
           <h3 className="font-serif text-3xl md:text-4xl text-foreground">
-            {"Я знал(а), что ты выберешь правильно!"}
+            {"Я знал, что ты выберешь правильно!"}
           </h3>
           <p className="text-accent font-serif text-xl italic">
             {"Ты навсегда в моём сердце"}
