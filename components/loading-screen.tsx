@@ -10,7 +10,7 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
   const [progress, setProgress] = useState(0)
   const [text, setText] = useState("")
   const initialDelayMs = 1200
-  const endDelayMs = 2000
+  const endDelayMs = 3000
   const fullText = "Загрузка чувств..."
 
   useEffect(() => {
@@ -77,9 +77,12 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
           <span className="animate-blink">|</span>
         </h1>
 
-        <div className="flex flex-col items-center gap-3">
-          <div className="font-mono text-sm text-muted-foreground tracking-widest">
-            {"["}{"\u2588".repeat(filledBlocks)}{"\u2591".repeat(emptyBlocks)}{"]"} {clampedProgress}%
+        <div className="flex w-64 flex-col items-center gap-3 md:w-80">
+          <div className="progress-track">
+            <div className="progress-fill" style={{ width: `${clampedProgress}%` }} />
+          </div>
+          <div className="font-mono text-sm md:text-base text-muted-foreground tracking-[0.2em]">
+            {clampedProgress}%
           </div>
         </div>
 
@@ -104,6 +107,36 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
         }
         .animate-fade-in {
           animation: fade-in 0.5s ease-out;
+        }
+        .progress-track {
+          position: relative;
+          width: 100%;
+          height: 10px;
+          border-radius: 999px;
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: linear-gradient(90deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+          box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.35);
+          overflow: hidden;
+        }
+        .progress-fill {
+          position: relative;
+          height: 100%;
+          border-radius: inherit;
+          background-image:
+            linear-gradient(90deg, #ff5f82, #ffb3c1 55%, #ff5f82),
+            linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
+          background-size: 100% 100%, 180% 100%;
+          background-position: 0 0, -200% 0;
+          box-shadow: 0 0 16px rgba(255, 95, 130, 0.35);
+          transition: width 0.2s ease-out;
+          animation: progress-shimmer 2.2s ease-in-out infinite;
+        }
+        @keyframes progress-shimmer {
+          0% { background-position: 0 0, -200% 0; }
+          100% { background-position: 0 0, 200% 0; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .progress-fill { animation: none; }
         }
       `}</style>
     </div>
